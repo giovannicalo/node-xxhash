@@ -1,0 +1,43 @@
+{
+	"author": {
+		"email": "giovanni.calo@live.it",
+		"name": "Giovanni Calò",
+		"url": "https://github.com/giovannicalo"
+	},
+	"bugs": {
+		"url": "https://github.com/giovannicalo/node-xxhash/issues"
+	},
+	"dependencies": {
+		"bindings": "^1.5.0",
+		"cmake-js": "^7.0.0",
+		"node-addon-api": "^5.0.0",
+		"unzipper": "^0.10.11"
+	},
+	"description": "xxHash",
+	"devDependencies": {
+		"eslint": "^8.25.0",
+		"eslint-config-giovanni": "giovannicalo/eslint-config",
+		"jest": "^29.2.1"
+	},
+	"engines": {
+		"node": ">=18.11.0"
+	},
+	"homepage": "https://github.com/giovannicalo/node-xxhash",
+	"keywords": ["hash", "native", "xxh3", "xxh32", "xxh64", "xxh128", "xxhash"],
+	"license": "MIT",
+	"main": "source/index.js",
+	"name": "xxhash",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/giovannicalo/node-xxhash.git"
+	},
+	"scripts": {
+		"benchmark": "node scripts/benchmark",
+		"build": "cmake-js compile",
+		"build-debug": "cmake-js compile --debug",
+		"install": "node scripts/install && npm run build",
+		"lint": "eslint -f pretty .",
+		"start": "jest --watch",
+		"test": "jest"
+	}
+}
