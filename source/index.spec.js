@@ -41,10 +41,14 @@ it("should hash the given data using xxHash XXH128 with the given seed", () => {
 it("should throw when given invalid arguments", () => {
 	const data = Buffer.from("foo");
 	for (const method of [xxh3, xxh32, xxh64, xxh128]) {
-		for (const parameters of [[], [42], [data, "foo"]]) {
+		for (const [parameters, error] of [
+			[[], "Invalid argument"],
+			[[42], "Invalid argument"],
+			[[data, "foo"], /A bigint|number was expected/u]
+		]) {
 			expect(() => {
 				method(...parameters);
-			}).toThrow();
+			}).toThrow(error);
 		}
 	}
 });
