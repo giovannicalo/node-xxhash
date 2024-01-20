@@ -12,9 +12,20 @@ if(MSVC)
 	set(WITH_CRT_DLL FALSE)
 endif()
 
-include_directories(${CMAKE_JS_INC})
-
 add_definitions(-DNAPI_VERSION=8)
+
+include(ExternalProject)
+
+ExternalProject_Add(
+	xxhashProject
+	BUILD_COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE}
+	CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DXXHASH_BUILD_XXHSUM=OFF
+	GIT_REPOSITORY "https://github.com/Cyan4973/xxHash.git"
+	GIT_SHALLOW TRUE
+	GIT_TAG "v0.8.1"
+	INSTALL_COMMAND ""
+	SOURCE_SUBDIR "cmake_unofficial"
+)
 
 file(GLOB_RECURSE source "source/native/*")
 
@@ -30,8 +41,10 @@ execute_process(
 
 string(REGEX REPLACE "[\n\r\"]" "" nodeAddonApi ${nodeAddonApi})
 
-add_subdirectory("libraries/xxhash/cmake_unofficial" EXCLUDE_FROM_ALL)
+ExternalProject_Get_Property(xxhashProject BINARY_DIR SOURCE_DIR)
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${nodeAddonApi} "libraries/xxhash")
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_JS_INC} ${nodeAddonApi} ${SOURCE_DIR})
+
+target_link_directories(${PROJECT_NAME} PRIVATE ${BINARY_DIR})
 
 target_link_libraries(${PROJECT_NAME} ${CMAKE_JS_LIB} xxhash)

@@ -11,4 +11,3 @@ build
 coverage
 jest.config.js
 jsconfig.json
-libraries
