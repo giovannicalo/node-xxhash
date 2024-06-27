@@ -19,7 +19,7 @@
 		"jest": "^29.7.0"
 	},
 	"engines": {
-		"node": ">=21.6.0"
+		"node": ">=22.3.0"
 	},
 	"homepage": "https://github.com/giovannicalo/node-xxhash",
 	"keywords": ["hash", "native", "xxh3", "xxh32", "xxh64", "xxh128", "xxhash"],
