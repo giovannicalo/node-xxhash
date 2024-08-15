@@ -38,5 +38,6 @@
 		"lint": "eslint -f pretty .",
 		"start": "jest --watch",
 		"test": "jest"
-	}
+	},
+	"version": "0.0.0"
 }
