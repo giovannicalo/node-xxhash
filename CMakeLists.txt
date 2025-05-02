@@ -21,7 +21,7 @@ ExternalProject_Add(
 	CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DXXHASH_BUILD_XXHSUM=OFF
 	GIT_REPOSITORY "https://github.com/Cyan4973/xxHash.git"
 	GIT_SHALLOW TRUE
-	GIT_TAG "v0.8.2"
+	GIT_TAG "v0.8.3"
 	INSTALL_COMMAND ""
 	SOURCE_SUBDIR "cmake_unofficial"
 )
@@ -29,6 +29,8 @@ ExternalProject_Add(
 file(GLOB_RECURSE source "source/native/*")
 
 add_library(${PROJECT_NAME} SHARED ${source} ${CMAKE_JS_SRC})
+
+add_dependencies(${PROJECT_NAME} xxhashProject)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
 
