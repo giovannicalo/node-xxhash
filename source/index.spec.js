@@ -44,7 +44,7 @@ it("should throw when given invalid arguments", () => {
 		for (const [parameters, error] of [
 			[[], "Invalid argument"],
 			[[42], "Invalid argument"],
-			[[data, "foo"], /A bigint|number was expected/u]
+			[[data, "foo"], /A bigint|number was expected/v]
 		]) {
 			expect(() => {
 				method(...parameters);
